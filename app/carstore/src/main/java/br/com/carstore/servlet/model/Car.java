@@ -4,7 +4,7 @@ public class Car {
 
     private String id;
     private String name;
-    private String color;
+
 
     public Car(String name) {
         this.name = name;
@@ -21,9 +21,5 @@ public class Car {
 
     public String getName() {
         return name;
-    }
-
-    public String getColor() {
-        return color;
     }
 }

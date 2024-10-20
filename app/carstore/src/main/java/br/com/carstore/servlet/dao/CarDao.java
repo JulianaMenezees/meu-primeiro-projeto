@@ -14,7 +14,7 @@ public class CarDao {
 
     public void createCar(Car car) {
 
-        String SQL = "INSERT INTO CAR (NAME, COLOR) VALUES (?, ?)";
+        String SQL = "INSERT INTO CAR (NAME) VALUES (?)";
 
         try {
 
@@ -24,7 +24,6 @@ public class CarDao {
 
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
 
-            preparedStatement.setString(2, car.getColor());
             preparedStatement.setString(1, car.getName());
 
             preparedStatement.execute();
@@ -61,7 +60,6 @@ public class CarDao {
 
                 String id = resultSet.getString("id");
                 String name = resultSet.getString("NAME");
-                String color = resultSet.getString("COLOR");
 
                 Car car = new Car(id, name);
 
@@ -107,6 +105,35 @@ public class CarDao {
         } catch (Exception e) {
 
             System.out.println("fail in database connection");
+
+        }
+
+    }
+
+    public void updateCar(Car car) {
+
+        String SQL = "UPDATE CAR SET NAME = ? WHERE ID = ?";
+
+        try {
+
+            Connection connection = DriverManager.getConnection("jdbc:h2:~/test", "sa","sa");
+
+            System.out.println("success in database connection");
+
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+
+            preparedStatement.setString(1, car.getName());
+            preparedStatement.setString(2, car.getId());
+            preparedStatement.execute();
+
+            System.out.println("success in update car");
+
+            connection.close();
+
+        } catch (Exception e) {
+
+            System.out.println("fail in database connection");
+            System.out.println("Error: " + e.getMessage());
 
         }
 

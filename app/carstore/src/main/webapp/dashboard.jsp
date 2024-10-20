@@ -19,19 +19,28 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Color</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
         <tbody>
             <c:forEach var="car" items="${cars}">
                 <tr>
+                    <td>${car.id}</td>
                     <td>${car.name}</td>
                     <td>${car.color}</td>
+                    <td>
+                        <form action="/delete-car" method="post">
+                            <input type="hidden" id="id" name="id" value="${car.id}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
                 </tr>
             </c:forEach>
         </tbody>
     </table>
-    <div>
+    </div>
 
 </body>
 </html>
